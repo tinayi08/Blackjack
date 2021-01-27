@@ -4,6 +4,9 @@ public class Game {
     private Player user;
     private Player computer;
     private Deck deck;
+    private static int numOfGames;
+    private static int numOfGamesCompWin;
+    private static int numOfGamesPlayWin;
 
 
     /**
@@ -41,6 +44,7 @@ public class Game {
 
             int winningPot = whoWon();
             user.setNewBalance(winningPot);
+            numOfGamesPlayed();
             if (user.isOutOfMoney()) {
                 return;
             }
@@ -88,9 +92,11 @@ public class Game {
         int winnings;
         if ((user.score() > computer.score() && user.score() <= 21) || (computer.score() > 21 && user.score() <= 21)) {
             System.out.println("\n" + user.getName() + " won " + (user.getPotValue())*2 + " dollars!");
+            numOfGamesPlayWin++;
             winnings = user.getPotValue();
         } else if ((computer.score() > user.score() && computer.score() <= 21) || (user.score() > 21 && computer.score() <= 21)) {
             System.out.println("\n" + "Computer won, you have lost your " + user.getPotValue() +" dollars.");
+            numOfGamesCompWin++;
             winnings = -(user.getPotValue());
         } else if (user.score() == computer.score()) {
             System.out.println("\n" + "You tied. You will receive your " + user.getPotValue() + " dollars back.");
@@ -99,7 +105,15 @@ public class Game {
             System.out.println("\n" + "There are no winners, you have lost your " + user.getPotValue() +" dollars.");
             winnings = -(user.getPotValue());
         }
-        System.out.println("-----");
+        System.out.println("Number of games you have won: " + numOfGamesPlayWin);
+        System.out.println("Number of games Computer has won: " + numOfGamesCompWin);
+
         return winnings;
     }
+    public static void numOfGamesPlayed(){
+        numOfGames++;
+        System.out.println("Number of games played: " + numOfGames);
+        System.out.println("-----");
+    }
+
 }
