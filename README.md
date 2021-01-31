@@ -1,6 +1,8 @@
 # Blackjack
 
-This is a Java project that allows you to play the game, Blackjack.
+This is a Java project that allows you to play the game, Blackjack. This project utilizes 
+POJOs. You will be able to play continuously against the computer, placing bets at each round, 
+until you decide to end the game or until you run out of money. 
 
 ## Installation
 1 - Clone the project
