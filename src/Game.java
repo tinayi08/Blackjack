@@ -73,6 +73,10 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Would you like to play again?");
         String playAgain = scanner.next();
+        while (!playAgain.equalsIgnoreCase("yes") && !playAgain.equalsIgnoreCase("no")) {
+            System.out.println("Please enter a valid answer.");
+            playAgain = scanner.next();
+        }
         if (playAgain.equalsIgnoreCase("yes")) {
             return true;
         } else {

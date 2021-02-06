@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
@@ -132,7 +134,17 @@ public class Player {
         Scanner scanner = new Scanner(System.in);
         String name = scanner.next();
         System.out.println("Welcome " + name + ". How much money did you bring to the table?");
-        int money = scanner.nextInt();
+        int money = 0;
+        boolean isValidInput = false;
+        do {
+            try {
+                money = scanner.nextInt();
+                isValidInput = true;
+            } catch (InputMismatchException exc) {
+                System.out.println("Please enter a valid amount");
+                scanner.next();
+            }
+        } while(!isValidInput);
         this.tableBalance = money;
         this.name = name;
         this.hand = new Hand();
@@ -146,8 +158,17 @@ public class Player {
     public void placeBet() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Great, how much money would you like to bet this round?");
-        //TODO - Try Catch handle if user inputs something other than int
-        int bet = scanner.nextInt();
+        boolean isValidInput = false;
+        int bet = 0;
+        do {
+            try {
+                bet = scanner.nextInt();
+                isValidInput = true;
+            } catch (InputMismatchException exc) {
+                System.out.println("Please enter a valid bet");
+                scanner.next();
+            }
+        } while(!isValidInput);
         while (!viableBet(bet)) {
             System.out.println("You don't have enough money, please enter a new bet.");
             bet = scanner.nextInt();
@@ -155,7 +176,7 @@ public class Player {
         potValue += bet;
     }
 
-    public void blackjackOrBust () {
+    public void blackjackOrBust() {
         if (hand.scoreTotal() > 21) {
             System.out.println("Busted");
         } else if (hand.scoreTotal() == 21) {
